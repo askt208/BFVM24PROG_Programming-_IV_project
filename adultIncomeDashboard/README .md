@@ -1,4 +1,4 @@
-# 📊 adultIncomeDashboard
+# adultIncomeDashboard
 
 An R package that provides a comprehensive analysis of the **UCI Adult Income Dataset**, including:
 
