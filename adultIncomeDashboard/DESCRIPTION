@@ -3,7 +3,7 @@ Title: Adult Income Shiny Dashboard & Statistical Analysis
 Version: 0.1.0
 Authors@R: 
     person("Mary", "Wu", 
-           email = "marywu@example.com", 
+           email = "p.wu.2@st.hanze.nl", 
            role = c("aut", "cre"))
 Description: 
     This package provides an interactive R Shiny dashboard and 
