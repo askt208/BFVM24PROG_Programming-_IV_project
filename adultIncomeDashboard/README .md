@@ -1,37 +1,35 @@
 # adultIncomeDashboard
 
-An R package that provides a comprehensive analysis of the **UCI Adult Income Dataset**, including:
+An R package that provides a comprehensive analysis of the Adult Census Income, including:
 
 - Data cleaning and summary statistics  
 - Visual exploration using `ggplot2`  
 - Hypothesis testing (t-tests, ANOVA, chi-square)  
 - Logistic regression modeling  
-- One RMarkdown analysis script (`assignment.Rmd`) for reproducible research  
-- (Optional) A Shiny dashboard for interactive exploration  
+- One RMarkdown analysis script (assignment.Rmd) for reproducible research  
+- Dashboard for interactive exploration  
 
 ---
 
 ## Project Structure
 
-```
 adultIncomeDashboard/
 ├── analysis/
-│   └── assignment.Rmd           # Main analysis script
+│   └── assignment.Rmd
 ├── inst/
 │   └── app/
-│       └── app.R                # Shiny dashboard
+│       └── app.R
 ├── R/
-│   ├── helpers.R                # Custom functions
-│   └── run_dashboard.R         # Launch function for the dashboard
+│   ├── helpers.R
+│   └── run_dashboard.R
 ├── DESCRIPTION
 ├── LICENSE
 ├── README.md
 └── .gitignore
-```
 
 ---
 
-## 📦 Installation
+## Installation
 
 To install this package from GitHub:
 
@@ -80,13 +78,13 @@ Includes:
 
 ## Dataset
 
-- **Source**: (https://archive.ics.uci.edu/ml/datasets/adult)  
-- **Observations**: ~48,000  
-- **Target variable**: `income` (<=50K, >50K)  
-- **Data type**: Mixed (categorical, numeric, binary)  
+- Source: https://www.kaggle.com/datasets/uciml/adult-census-income
+- Observations: ~48,000  
+- Target variable: income (<=50K, >50K)  
+- Data type: Mixed (categorical, numeric, binary)  
 
 ---
 
 ## Author
 
-**Mary Wu** 
+Mary Wu
