@@ -1,0 +1,32 @@
+Package: adultIncomeDashboard
+Title: Adult Income Shiny Dashboard & Statistical Analysis
+Version: 0.1.0
+Authors@R: 
+    person("Mary", "Wu", 
+           email = "marywu@example.com", 
+           role = c("aut", "cre"))
+Description: 
+    This package provides an interactive R Shiny dashboard and 
+    supporting scripts for analyzing the UCI Adult Census Income dataset. 
+    It includes data visualizations, summary statistics, hypothesis testing, 
+    and logistic regression modeling.
+
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+VignetteBuilder: knitr
+Depends: R (>= 4.1.0)
+Imports:
+    shiny,
+    tidyverse,
+    janitor,
+    skimr,
+    broom,
+    modelsummary,
+    DT,
+    knitr
+Suggests:
+    testthat,
+    rmarkdown

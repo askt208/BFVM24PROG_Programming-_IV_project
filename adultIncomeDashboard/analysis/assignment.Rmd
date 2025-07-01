@@ -1,0 +1,146 @@
+---
+title: "Assignment"
+author: "Mary"
+date: "2025-06-26"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+title: "Adult Income Dataset: From Exploration to Statistical Analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(janitor)
+library(skimr)
+library(broom)
+library(modelsummary)
+``` 
+
+## 1. Load and Clean Data
+
+```{r load-data}
+adult <- read_csv("adult.csv", show_col_types = FALSE) |>
+  clean_names() |>
+  mutate(across(where(is.character), as.factor))
+```
+
+## 2. Basic Exploration
+
+```{r glimpse-skim}
+glimpse(adult)
+skim(adult)
+```
+
+### Missing Values
+
+```{r missing-values}
+adult |> summarise(across(everything(), ~ sum(is.na(.))))
+```
+
+### Class Balance
+
+```{r income-balance}
+adult |> count(income) |> mutate(prop = n / sum(n))
+```
+
+```{r}
+datasummary_skim(adult %>% select(age, gender, hours_per_week, education),
+                 title = "Descriptive Statistics: Adult Income Variables")
+```
+
+
+## 3. Visual Exploration
+
+### Hours per Week by Income
+```{r box-hours-income}
+ggplot(adult, aes(x = income, y = hours_per_week, fill = income)) +
+  geom_boxplot() +
+  theme_minimal()install.packages("modelsummary")
+```
+
+### Age Histogram by Sex
+```{r age-hist-sex}
+ggplot(adult, aes(x = age, fill = gender)) +
+  geom_histogram(bins = 30, alpha = 0.6, position = "identity") +
+  theme_minimal()
+```
+
+### Education vs Hours (Colored by Income)
+```{r edu-vs-hours}
+ggplot(adult, aes(x = education, fill = income)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Income Distribution by Education Level",
+       x = "Education Level", y = "Count") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## 4. Descriptive Statistics
+
+```{r summary-stats}
+adult |> 
+  group_by(income) |>
+  summarise(
+    count = n(),
+    mean_age = mean(age),
+    median_hours = median(hours_per_week),
+    sd_hours = sd(hours_per_week)
+  )
+```
+
+## 5. Hypothesis Testing
+
+### T-Test: Hours per Week by Income
+```{r ttest-hours}
+t.test(hours_per_week ~ income, data = adult)
+```
+
+### T-Test: Age by Sex
+```{r ttest-age-sex}
+t.test(age ~ gender, data = adult)
+```
+
+### Chi-Square: Education vs Income
+```{r chisq-edu-income}
+table_edu <- table(adult$education, adult$income)
+chisq.test(table_edu)
+```
+
+## 6. ANOVA: Age ~ Education
+```{r anova-age-edu}
+aov_model <- aov(age ~ education, data = adult)
+summary(aov_model)
+```
+
+## 7. Logistic Regression
+
+```{r logistic-model}
+model <- glm(income ~ age + education + hours_per_week + gender, 
+             data = adult, family = binomial)
+summary(model)
+```
+
+### Odds Ratios
+```{r model-odds}
+tidy(model, exponentiate = TRUE, conf.int = TRUE)
+```
+
+### Accuracy
+```{r model-accuracy}
+predicted <- ifelse(predict(model, type = "response") > 0.5, 
+                    ">50K", "<=50K")
+mean(predicted == adult$income)
+```
+
+## 8. Conclusion
+
+- Individuals earning >50K work significantly more hours per week.
+- Age, education level, hours per week, and sex are significant predictors of high income.
+- The logistic regression model has moderate accuracy and provides interpretable odds ratios.
