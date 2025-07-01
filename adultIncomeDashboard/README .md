@@ -12,7 +12,7 @@ An R package that provides a comprehensive analysis of the Adult Census Income, 
 ---
 
 ## Project Structure
-
+```
 adultIncomeDashboard/
 ├── analysis/
 │   └── assignment.Rmd
@@ -26,22 +26,8 @@ adultIncomeDashboard/
 ├── LICENSE
 ├── README.md
 └── .gitignore
-
----
-
-## Installation
-
-To install this package from GitHub:
-
-```r
-# install.packages("devtools")
-devtools::install_github("name/adultIncomeDashboard")
 ```
-
-Replace `name` with actual GitHub username.
-
 ---
-
 ## Run the Dashboard
 
 If you included a Shiny app in `inst/app/`, run it with:
